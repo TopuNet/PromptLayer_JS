@@ -1,0 +1,50 @@
+﻿<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1,user-scalable=no" />
+    <title>PromptLayer</title>
+    <link href="/css/PromptLayer.css" rel="stylesheet" />
+</head>
+
+<body>
+    <div>
+        <h1>JS弹层演示</h1>
+        <input type="button" value="点我弹层" />
+        <div id="PromptLayer_white"></div>
+        <div id="PromptLayer">
+            <table>
+                <tr>
+                    <td class="PlaceContent"></td>
+                </tr>
+            </table>
+        </div>
+    </div>
+    <script src="/inc/jquery.min.js" type="text/javascript"></script>
+    <script src="/jq/PromptLayer.js" type="text/javascript"></script>
+    <script type="text/javascript">
+    $(function() {
+        PromptLayer.init();
+
+        $("input[type=button]").click(function() {
+            var obj = {
+                str: "提交成功", //弹出层显示文字内容，支持HTML标签
+                t: 0, //0 - 2.5s后自动关闭（默认） 1 - 不自动关闭,
+                width: 25, //弹层宽度，默认300
+                height: 10, //弹层高度，默认150
+                unit: "vw", //单位（px或vw），默认px，且IE6/7/8强制使用px。
+                callback_open: function() {
+                    console.log("弹出后的回调方法");
+                },
+                callback_close: function() {
+                    console.log("关闭后的回调方法");
+                }
+            }
+            PromptLayer.show(obj);
+        });
+    });
+    </script>
+</body>
+
+</html>
