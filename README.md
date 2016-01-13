@@ -1,5 +1,10 @@
-# PromptLayer JS插件 v1.0.2
+# PromptLayer JS插件 v1.1.2
 ###JS弹出消息层
+
+更新记录：
+-------------
+1. 增加文字大小参数 fontSize:"字体大小", 默认16。
+2. 增加文字单位参数 fontUnit:"字体单位" "px|vw", 默认px，且IE6/7/8强制使用px。
 
 文件结构：
 -------------
@@ -39,7 +44,9 @@
 			t: 0, //0 - 2.5s后自动关闭（默认） 1 - 不自动关闭,
 			width: 300,  //弹层宽度，默认300
 			height: 150, //弹层高度，默认150
-			unit:"vw", //单位（px或vw），默认px，且IE6/7/8强制使用px。
+			unit:"vw", //宽高单位（px或vw），默认px，且IE6/7/8强制使用px。
+			fontSize:1.5, //字体大小，默认16。
+			fontUnit:"vw", //字体单位（px或vw），默认px，且IE6/7/8强制使用px。
 			callback_open:function(){
 				console.log("弹出后的回调方法");
 			},
