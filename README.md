@@ -1,7 +1,7 @@
-# PromptLayer JS插件 v1.1.2
+# PromptLayer JS插件 v1.1.1
 ###JS弹出消息层
 
-更新记录：
+1.1.1 更新记录：
 -------------
 1. 增加文字大小参数 fontSize:"字体大小", 默认16。
 2. 增加文字单位参数 fontUnit:"字体单位" "px|vw", 默认px，且IE6/7/8强制使用px。
