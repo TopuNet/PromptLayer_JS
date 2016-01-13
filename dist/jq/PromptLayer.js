@@ -27,7 +27,7 @@ var PromptLayer = {
     //     fontSize:"字体大小", 默认16。
     //     fontUnit:字体单位 "px|vw", 默认px，且IE6/7/8强制使用px。
     //     callback_open:function(){弹出后的回调方法},
-    //     callback_close:function(){关闭后的回调方法}1
+    //     callback_close:function(){关闭后的回调方法}
     // }
     show: function(obj) {
         if (obj.str == undefined)
