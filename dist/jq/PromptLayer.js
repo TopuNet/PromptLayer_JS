@@ -23,7 +23,9 @@ var PromptLayer = {
     //     t: 0 - 自动关闭（默认） 1 - 不自动关闭,
     //     width:"宽度",  默认300
     //     height:"高度", 默认150
-    //     unit:"px|vw", 默认px，且IE6/7/8强制使用px
+    //     unit:宽高单位 "px|vw", 默认px，且IE6/7/8强制使用px
+    //     fontSize:"字体大小", 默认16。
+    //     fontUnit:字体单位 "px|vw", 默认px，且IE6/7/8强制使用px。
     //     callback_open:function(){弹出后的回调方法},
     //     callback_close:function(){关闭后的回调方法}
     // }
@@ -37,7 +39,11 @@ var PromptLayer = {
         if (obj.height == undefined)
             obj.height = 150;
         if (obj.unit == undefined)
-            obj.unit = "px";
+            obj.unit = "vw";
+        if (obj.fontSize == undefined)
+            obj.fontSize = 16;
+        if (obj.fontUnit == undefined)
+            obj.fontUnit = "px";
         obj.unit = obj.unit.toLowerCase();
         PromptLayer.callback_close = obj.callback_close;
 
@@ -52,34 +58,21 @@ var PromptLayer = {
                 var trim_Version = version[1].replace(/[ ]/g, "");
                 if (trim_Version == "MSIE6.0" || trim_Version == "MSIE7.0" || trim_Version == "MSIE8.0") {
                     obj.unit = "px";
+                    obj.fontUnit = "px";
                 }
             }
         }
 
-        //设置宽高
+        //设置宽高和字体
         $(PromptLayer.LayerID + "," + PromptLayer.LayerID + " .PlaceContent").css({
             "width": obj.width + obj.unit,
             "height": obj.height + obj.unit,
-            "line-height": "25px"
+            "line-height": "25px",
+            "font-size": obj.fontSize + obj.fontUnit
         });
-
-
-        //屏幕总宽度
-        var zw = $(window).width();
-        var zh = $(window).height();
-        var w = $(PromptLayer.LayerID).width();
-        var h = $(PromptLayer.LayerID).height();
-        var left = (zw - w) / 2;
-        var top = (zh - h) / 2;
 
         //滚动条
         var scrollTop = $(document).scrollTop();
-
-        //设置top和left
-        $(PromptLayer.LayerID).css({
-            "top": top + scrollTop,
-            "left": left
-        });
 
         //显示遮罩层
         $("#PromptLayer_white").show(0);
