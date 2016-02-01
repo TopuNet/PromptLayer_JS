@@ -13,7 +13,8 @@ var PromptLayer = {
 
 
         //监听弹层点击事件：关闭弹层
-        $(PromptLayer.LayerID).on("click", function() {
+        $(PromptLayer.LayerID).on("touchstart mousedown", function(e) {
+            e.preventDefault();
             PromptLayer.close(PromptLayer.callback_close);
         });
     },
@@ -35,15 +36,15 @@ var PromptLayer = {
         if (obj.t == undefined)
             obj.t = 0;
         if (obj.width == undefined)
-            obj.width = 300;
+            obj.width = 56;
         if (obj.height == undefined)
-            obj.height = 150;
+            obj.height = 15;
         if (obj.unit == undefined)
             obj.unit = "vw";
         if (obj.fontSize == undefined)
-            obj.fontSize = 16;
+            obj.fontSize = 4;
         if (obj.fontUnit == undefined)
-            obj.fontUnit = "px";
+            obj.fontUnit = "vw";
         obj.unit = obj.unit.toLowerCase();
         PromptLayer.callback_close = obj.callback_close;
 
