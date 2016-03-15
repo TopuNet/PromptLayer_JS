@@ -37,9 +37,9 @@ var PromptLayer = {
         if (obj.width == undefined)
             obj.width = 300;
         if (obj.height == undefined)
-            obj.height = 150;
+            obj.height = 100;
         if (obj.unit == undefined)
-            obj.unit = "vw";
+            obj.unit = "px";
         if (obj.fontSize == undefined)
             obj.fontSize = 16;
         if (obj.fontUnit == undefined)
@@ -70,6 +70,32 @@ var PromptLayer = {
             "line-height": "25px",
             "font-size": obj.fontSize + obj.fontUnit
         });
+
+        // 调整位置
+        var resize_init = function() {
+            var width_px = obj.width;
+            var height_px = obj.height;
+            if (obj.unit == "vw") {
+                var window_width_px = $(window).width();
+                width_px = window_width_px * width_px / 100;
+                height_px = window_width_px * height_px / 100;
+            }
+            var margin_top = -height_px / 2;
+            var margin_left = -width_px / 2;
+            $(PromptLayer.LayerID).css("margin", margin_top + "px 0 0 " + margin_left + "px");
+        };
+        resize_init();
+
+        // 监听窗口变化
+        var resize_n = 0;
+        $(window).resize = function() {
+            if ((++resize_n) % 2 == 0)
+                return;
+            setTimeout(function() {
+                resize_init();
+                resize_n = 0;
+            }, 0);
+        };
 
         //滚动条
         var scrollTop = $(document).scrollTop();

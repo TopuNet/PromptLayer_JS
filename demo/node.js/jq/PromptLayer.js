@@ -13,8 +13,7 @@ var PromptLayer = {
 
 
         //监听弹层点击事件：关闭弹层
-        $(PromptLayer.LayerID).on("touchstart mousedown", function(e) {
-            e.preventDefault();
+        $(PromptLayer.LayerID).on("click", function() {
             PromptLayer.close(PromptLayer.callback_close);
         });
     },
@@ -36,15 +35,15 @@ var PromptLayer = {
         if (obj.t == undefined)
             obj.t = 0;
         if (obj.width == undefined)
-            obj.width = 56;
+            obj.width = 300;
         if (obj.height == undefined)
-            obj.height = 15;
+            obj.height = 100;
         if (obj.unit == undefined)
-            obj.unit = "vw";
+            obj.unit = "px";
         if (obj.fontSize == undefined)
-            obj.fontSize = 4;
+            obj.fontSize = 16;
         if (obj.fontUnit == undefined)
-            obj.fontUnit = "vw";
+            obj.fontUnit = "px";
         obj.unit = obj.unit.toLowerCase();
         PromptLayer.callback_close = obj.callback_close;
 
@@ -71,6 +70,32 @@ var PromptLayer = {
             "line-height": "25px",
             "font-size": obj.fontSize + obj.fontUnit
         });
+
+        // 调整位置
+        var resize_init = function() {
+            var width_px = obj.width;
+            var height_px = obj.height;
+            if (obj.unit == "vw") {
+                var window_width_px = $(window).width();
+                width_px = window_width_px * width_px / 100;
+                height_px = window_width_px * height_px / 100;
+            }
+            var margin_top = -height_px / 2;
+            var margin_left = -width_px / 2;
+            $(PromptLayer.LayerID).css("margin", margin_top + "px 0 0 " + margin_left + "px");
+        };
+        resize_init();
+
+        // 监听窗口变化
+        var resize_n = 0;
+        $(window).resize = function() {
+            if ((++resize_n) % 2 == 0)
+                return;
+            setTimeout(function() {
+                resize_init();
+                resize_n = 0;
+            }, 0);
+        };
 
         //滚动条
         var scrollTop = $(document).scrollTop();
