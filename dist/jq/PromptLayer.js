@@ -22,7 +22,7 @@ var PromptLayer = {
     //     str: "提示内容",
     //     t: 0 - 自动关闭（默认） 1 - 不自动关闭,
     //     width:"宽度",  默认300
-    //     height:"高度", 默认150
+    //     height:"高度", 默认100
     //     unit:宽高单位 "px|vw", 默认px，且IE6/7/8强制使用px
     //     fontSize:"字体大小", 默认16。
     //     fontUnit:字体单位 "px|vw", 默认px，且IE6/7/8强制使用px。
