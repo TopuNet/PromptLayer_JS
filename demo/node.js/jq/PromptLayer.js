@@ -101,9 +101,9 @@ var PromptLayer = {
         var scrollTop = $(document).scrollTop();
 
         //显示遮罩层
-        $("#PromptLayer_white").show(0);
+        $("#PromptLayer_white").fadeIn(100);
 
-        $(PromptLayer.LayerID).show(0, function() {
+        $(PromptLayer.LayerID).fadeIn(100, function() {
             if (obj.callback_open != null)
                 obj.callback_open();
         });
@@ -118,8 +118,8 @@ var PromptLayer = {
     // callback_close：关闭后回调方法
     close: function(callback_close) {
         clearTimeout(PromptLayer.global);
-        $(PromptLayer.LayerID + ",#PromptLayer_white").hide(0);
-        $(PromptLayer.LayerID).hide(0, function() {
+        $(PromptLayer.LayerID + ",#PromptLayer_white").css("display", "none");
+        $(PromptLayer.LayerID).fadeOut(100, function() {
             $(PromptLayer.LayerID + " .PlaceContent").html("");
             if (callback_close != undefined) {
                 callback_close();
