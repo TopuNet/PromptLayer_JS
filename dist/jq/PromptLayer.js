@@ -1,7 +1,8 @@
 /*
+ * v1.2.2
  * 高京
  * 20151112
- * 提示框弹层配套js 复制自爱传播
+ * 提示框弹层配套js
  */
 
 var PromptLayer = {
@@ -30,6 +31,9 @@ var PromptLayer = {
     //     callback_close:function(){关闭后的回调方法}
     // }
     show: function(obj) {
+        // 让所有input和select失去焦点
+        $("input,select").blur();
+
         if (obj.str == undefined)
             obj.str = "";
         if (obj.t == undefined)
