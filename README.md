@@ -1,9 +1,14 @@
-# PromptLayer JS插件 v1.2.2
+# PromptLayer JS插件 v1.2.4
 ###JS弹出消息层
 ###兼容原生JS规范和AMD规范
 
 更新历史：
 --------------
+
+1.2.4
+
+	    1. 在dist文件夹中，增加package.json
+	    2. 将dist发布到npm：TopuNet-PromptLayer-JS
 
 1.2.2
 

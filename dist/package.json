@@ -1,0 +1,22 @@
+{
+  "name": "TopuNet-PromptLayer-JS",
+  "version": "1.2.4",
+  "description": "Topu.net JS弹消息层插件",
+  "main": "jq/PromptLayer.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/TopuNet/PromptLayer_JS.git"
+  },
+  "keywords": [
+    "topu.net"
+  ],
+  "author": "Topu.net",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/TopuNet/PromptLayer_JS/issues"
+  },
+  "homepage": "https://github.com/TopuNet/PromptLayer_JS#readme"
+}

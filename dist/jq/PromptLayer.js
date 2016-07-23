@@ -1,8 +1,8 @@
 /*
- * v1.2.2
+ * v1.2.3
  * 高京
  * 20151112
- * 提示框弹层配套js
+ * 提示框弹层
  */
 
 var PromptLayer = {
@@ -12,6 +12,7 @@ var PromptLayer = {
     callback_close: null, //将obj.callback_close转存为全局变量
     init: function() {
 
+        PromptLayer.includeCSS("/inc/PromptLayer.css");
 
         //监听弹层点击事件：关闭弹层
         $(PromptLayer.LayerID).on("click", function() {
@@ -129,6 +130,15 @@ var PromptLayer = {
                 callback_close();
             }
         });
+    },
+
+    includeCSS: function(path) {
+        var a = document.createElement("link");
+        a.type = "text/css";
+        a.rel = "stylesheet";
+        a.href = path;
+        var head = document.getElementsByTagName("head")[0];
+        head.appendChild(a);
     }
 };
 

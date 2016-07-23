@@ -1,29 +1,5 @@
-﻿<!DOCTYPE html>
-<html xmlns="http://www.w3.org/1999/xhtml">
+require(["PromptLayer", "/inc/jquery.min.js"], function($PromptLayer) {
 
-<head>
-    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-    <meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1,user-scalable=no" />
-    <title>PromptLayer</title>
-    <link href="/inc/PromptLayer.css" rel="stylesheet" />
-</head>
-
-<body>
-    <div>
-        <h1>JS弹层演示，/app.js里改渲染页面</h1>
-        <input type="button" value="点我弹层" />
-        <div id="PromptLayer_white"></div>
-        <div id="PromptLayer">
-            <table>
-                <tr>
-                    <td class="PlaceContent"></td>
-                </tr>
-            </table>
-        </div>
-    </div>
-    <script src="/inc/jquery.min.js" type="text/javascript"></script>
-    <script src="/jq/PromptLayer.js" type="text/javascript"></script>
-    <script type="text/javascript">
     $(function() {
         PromptLayer.init();
 
@@ -46,7 +22,4 @@
             PromptLayer.show(obj);
         });
     });
-    </script>
-</body>
-
-</html>
+});
