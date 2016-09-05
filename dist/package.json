@@ -1,6 +1,6 @@
 {
   "name": "TopuNet-PromptLayer-JS",
-  "version": "1.2.4",
+  "version": "1.2.5",
   "description": "Topu.net JS弹消息层插件",
   "main": "jq/PromptLayer.js",
   "scripts": {

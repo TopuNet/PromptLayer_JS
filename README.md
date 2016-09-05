@@ -1,47 +1,6 @@
-# PromptLayer JS插件 v1.2.4
+# PromptLayer JS插件 v1.2.5
 ###JS弹出消息层
-###兼容原生JS规范和AMD规范
-
-更新历史：
---------------
-
-1.2.4
-
-	    1. 在dist文件夹中，增加package.json
-	    2. 将dist发布到npm：TopuNet-PromptLayer-JS
-
-1.2.2
-
-		1. 弹层前，让所有input和select失去焦点。解决软键盘弹出时，弹层居中不美观的问题
-
-1.2.1
-
-		1. 兼容原生JS和AMD规范
-		2. 修改demo
-
-1.1.4
-
-		1. 修改移动端背景无透明度bug
-
-
-1.1.3
-
-		1. 修正小Bug
-
-1.1.2
-
-		1. 增加PC端重置窗口大小后的遮罩层大小重置及居中
-		2. 修改px为单位时的居中问题
-		3. 修正IE下的关闭bug
-
-1.1.1
-
-		1. 增加文字大小参数 fontSize:"字体大小", 默认16。
-		2. 增加文字单位参数 fontUnit:"字体单位" "px|vw", 默认px，且IE6/7/8强制使用px。
-
-1.0.1：
-
-		完成基本功能
+###安装：npm install TopuNet-PromptLayer-JS
 
 文件结构：
 -------------
@@ -96,3 +55,49 @@ requireJS引用：
 		PromptLayer.show(obj);
 
 2. 如想在一个项目中统一风格，可以直接修改PromptLayer.js源码中的默认参数或进行二次封装
+
+
+更新历史：
+--------------
+
+1.2.5
+
+	    1. 修改bug：垂直不居中，dist中/inc/css不对
+
+1.2.4
+
+	    1. 在dist文件夹中，增加package.json
+	    2. 将dist发布到npm：TopuNet-PromptLayer-JS
+
+1.2.2
+
+		1. 弹层前，让所有input和select失去焦点。解决软键盘弹出时，弹层居中不美观的问题
+
+1.2.1
+
+		1. 兼容原生JS和AMD规范
+		2. 修改demo
+
+1.1.4
+
+		1. 修改移动端背景无透明度bug
+
+
+1.1.3
+
+		1. 修正小Bug
+
+1.1.2
+
+		1. 增加PC端重置窗口大小后的遮罩层大小重置及居中
+		2. 修改px为单位时的居中问题
+		3. 修正IE下的关闭bug
+
+1.1.1
+
+		1. 增加文字大小参数 fontSize:"字体大小", 默认16。
+		2. 增加文字单位参数 fontUnit:"字体单位" "px|vw", 默认px，且IE6/7/8强制使用px。
+
+1.0.1：
+
+		完成基本功能
