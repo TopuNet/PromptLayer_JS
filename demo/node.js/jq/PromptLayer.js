@@ -1,5 +1,5 @@
 /*
- * v1.2.5
+ * v1.2.6
  * 高京
  * 20151112
  * 提示框弹层
@@ -35,19 +35,19 @@ var PromptLayer = {
         // 让所有input和select失去焦点
         $("input,select").blur();
 
-        if (obj.str == undefined)
+        if (obj.str === undefined)
             obj.str = "";
-        if (obj.t == undefined)
+        if (obj.t === undefined)
             obj.t = 0;
-        if (obj.width == undefined)
+        if (obj.width === undefined)
             obj.width = 300;
-        if (obj.height == undefined)
+        if (obj.height === undefined)
             obj.height = 100;
-        if (obj.unit == undefined)
+        if (obj.unit === undefined)
             obj.unit = "px";
-        if (obj.fontSize == undefined)
+        if (obj.fontSize === undefined)
             obj.fontSize = 16;
-        if (obj.fontUnit == undefined)
+        if (obj.fontUnit === undefined)
             obj.fontUnit = "px";
         obj.unit = obj.unit.toLowerCase();
         PromptLayer.callback_close = obj.callback_close;
@@ -94,7 +94,7 @@ var PromptLayer = {
         // 监听窗口变化
         var resize_n = 0;
         $(window).resize = function() {
-            if ((++resize_n) % 2 == 0)
+            if ((++resize_n) % 2 === 0)
                 return;
             setTimeout(function() {
                 resize_init();
@@ -102,17 +102,14 @@ var PromptLayer = {
             }, 0);
         };
 
-        //滚动条
-        var scrollTop = $(document).scrollTop();
-
         //显示遮罩层
         $("#PromptLayer_white").fadeIn(100);
 
         $(PromptLayer.LayerID).fadeIn(100, function() {
-            if (obj.callback_open != null)
+            if (obj.callback_open !== null)
                 obj.callback_open();
         });
-        if (obj.t == 0) {
+        if (obj.t === 0) {
             PromptLayer.global = setTimeout(function() {
                 PromptLayer.close(obj.callback_close);
             }, PromptLayer.Timer);
@@ -126,7 +123,7 @@ var PromptLayer = {
         $(PromptLayer.LayerID + ",#PromptLayer_white").css("display", "none");
         $(PromptLayer.LayerID).fadeOut(100, function() {
             $(PromptLayer.LayerID + " .PlaceContent").html("");
-            if (callback_close != undefined) {
+            if (callback_close !== undefined) {
                 callback_close();
             }
         });

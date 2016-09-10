@@ -1,4 +1,4 @@
-# PromptLayer JS插件 v1.2.5
+# PromptLayer JS插件 v1.2.6
 ###JS弹出消息层
 ###安装：npm install TopuNet-PromptLayer-JS
 
@@ -59,6 +59,9 @@ requireJS引用：
 
 更新历史：
 --------------
+1.2.6
+
+	    1. 通过jshint验证
 
 1.2.5
 
