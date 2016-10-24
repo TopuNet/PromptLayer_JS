@@ -1,22 +1,88 @@
 /*
- * v1.2.6
- * 高京
- * 20151112
+ * v2.0.1
  * 提示框弹层
  */
 
 var PromptLayer = {
-    LayerID: "#PromptLayer", //常量
-    global: null, //setTimeout全局变量
-    Timer: 2500, //自动关闭等待时间(ms)
-    callback_close: null, //将obj.callback_close转存为全局变量
     init: function() {
 
-        PromptLayer.includeCSS("/inc/PromptLayer.css");
+        // 初始化弹层
+        this.Layer_init.apply(this);
+    },
+    // 初始化弹层
+    Layer_init: function() {
+        // 背景层
+        this.dom_bg_Layer = $(document.createElement("div"))
+            .css({
+                "position": "fixed",
+                "top": "0",
+                "left": "0",
+                "filter": "alpha(Opacity = 0)",
+                "-moz-opacity": "0",
+                "opacity": "0"
+            });
+        $("body").append(this.dom_bg_Layer);
 
-        //监听弹层点击事件：关闭弹层
-        $(PromptLayer.LayerID).on("click", function() {
-            PromptLayer.close(PromptLayer.callback_close);
+        // 显示层
+        this.dom_show_Layer = $(document.createElement("div"))
+            .css({
+                "position": "fixed",
+                "top": "50%",
+                "left": "50%",
+                "display": "none",
+                "cursor": "pointer"
+            });
+        $("body").append(this.dom_show_Layer);
+
+        // 表格
+        this.dom_table = $(document.createElement("table"))
+            .css({
+                "width": "100%",
+                "height": "100%"
+            })
+            .append(document.createElement("tr"));
+        $(this.dom_show_Layer.append(this.dom_table));
+
+        // td
+        this.dom_td = $(document.createElement("td"))
+            .css({
+                "vertical-align": "middle",
+                "text-align": "center",
+                "background-color": "#fff",
+                "border-radius": "10px",
+                "line-height": "25px"
+            });
+        this.dom_table.find("tr").append(this.dom_td);
+
+    },
+    // 调整宽高及位置
+    position_reinit: function() {
+
+        var _this = this;
+
+        var window_width_px = $(window).width();
+        var window_height_px = $(window).height();
+
+        // 背景层
+        _this.dom_bg_Layer.css({
+            "background-color": _this.Paras.bg_Layer_color,
+            "width": window_width_px + "px",
+            "height": window_height_px + "px",
+            "z-index": _this.Paras.z_index
+        });
+
+        // 内容层
+        _this.dom_show_Layer.css({
+            "width": _this.Paras.width + _this.Paras.unit,
+            "height": _this.Paras.height + _this.Paras.unit,
+            "z-index": _this.Paras.z_index + 1,
+            "margin-left": -_this.Paras.width / 2 + _this.Paras.unit,
+            "margin-top": -_this.Paras.height / 2 + _this.Paras.unit
+        });
+
+        // 内容td
+        _this.dom_td.css({
+            "font-size": _this.Paras.fontSize + _this.Paras.fontUnit
         });
     },
     //弹框
@@ -28,121 +94,119 @@ var PromptLayer = {
     //     unit:宽高单位 "px|vw", 默认px，且IE6/7/8强制使用px
     //     fontSize:"字体大小", 默认16。
     //     fontUnit:字体单位 "px|vw", 默认px，且IE6/7/8强制使用px。
+    //     z_index: 弹层的z-index，内容盒为z_index+1，默认400 
+    //     close_timer_ms: 弹层自动关闭时间，单位毫秒。默认2500
+    //     bg_Layer_color: 背景层颜色，默认#000
+    //     bg_Layer_opacity: 背景层透明度，默认0.4
     //     callback_open:function(){弹出后的回调方法},
     //     callback_close:function(){关闭后的回调方法}
     // }
-    show: function(obj) {
-        // 让所有input和select失去焦点
-        $("input,select").blur();
 
-        if (obj.str === undefined)
-            obj.str = "";
-        if (obj.t === undefined)
-            obj.t = 0;
-        if (obj.width === undefined)
-            obj.width = 300;
-        if (obj.height === undefined)
-            obj.height = 100;
-        if (obj.unit === undefined)
-            obj.unit = "px";
-        if (obj.fontSize === undefined)
-            obj.fontSize = 16;
-        if (obj.fontUnit === undefined)
-            obj.fontUnit = "px";
-        obj.unit = obj.unit.toLowerCase();
-        PromptLayer.callback_close = obj.callback_close;
+    show: function(opt) {
+        var _this = this;
 
-        $(PromptLayer.LayerID + " .PlaceContent").html(obj.str);
+        // 让所有input和select和textarea失去焦点
+        $("input,select,textarea").blur();
+
+        // 设置默认值
+        var opt_default = {
+            str: "",
+            t: 0,
+            width: 300,
+            height: 100,
+            unit: "px",
+            fontSize: 16,
+            fontUnit: "px",
+            z_index: 400,
+            close_timer_ms: 2500,
+            bg_Layer_color: "#ff0000",
+            bg_Layer_opacity: 0.1
+        };
+
+        _this.Paras = $.extend(opt_default, opt);
+        _this.Paras.unit = _this.Paras.unit.toLowerCase();
 
         //IE6/7/8强制使用px
-        if (obj.unit != "px") {
+        if (_this.Paras.unit != "px") {
             var browser = navigator.appName;
             if (browser == "Microsoft Internet Explorer") {
                 var b_version = navigator.appVersion;
                 var version = b_version.split(";");
                 var trim_Version = version[1].replace(/[ ]/g, "");
                 if (trim_Version == "MSIE6.0" || trim_Version == "MSIE7.0" || trim_Version == "MSIE8.0") {
-                    obj.unit = "px";
-                    obj.fontUnit = "px";
+                    _this.Paras.unit = "px";
+                    _this.Paras.fontUnit = "px";
                 }
             }
         }
 
-        //设置宽高和字体
-        $(PromptLayer.LayerID + "," + PromptLayer.LayerID + " .PlaceContent").css({
-            "width": obj.width + obj.unit,
-            "height": obj.height + obj.unit,
-            "line-height": "25px",
-            "font-size": obj.fontSize + obj.fontUnit
-        });
+        // 调整宽高及位置
+        _this.position_reinit.apply(_this);
 
-        // 调整位置
-        var resize_init = function() {
-            var width_px = obj.width;
-            var height_px = obj.height;
-            if (obj.unit == "vw") {
-                var window_width_px = $(window).width();
-                width_px = window_width_px * width_px / 100;
-                height_px = window_width_px * height_px / 100;
-            }
-            var margin_top = -height_px / 2;
-            var margin_left = -width_px / 2;
-            $(PromptLayer.LayerID).css("margin", margin_top + "px 0 0 " + margin_left + "px");
-        };
-        resize_init();
+        // 设置文字内容
+        _this.dom_td.text(_this.Paras.str);
 
         // 监听窗口变化
         var resize_n = 0;
-        $(window).resize = function() {
+
+        $(window).resize(function() {
+
             if ((++resize_n) % 2 === 0)
                 return;
             setTimeout(function() {
-                resize_init();
+                _this.position_reinit.apply(_this);
                 resize_n = 0;
             }, 0);
-        };
+        });
 
         //显示遮罩层
-        $("#PromptLayer_white").fadeIn(100);
+        _this.dom_bg_Layer.fadeTo(100, _this.Paras.bg_Layer_opacity);
+        _this.dom_show_Layer.fadeIn(100, function() {
 
-        $(PromptLayer.LayerID).fadeIn(100, function() {
-            if (obj.callback_open !== null)
-                obj.callback_open();
+            // 执行打开回调
+            if (_this.Paras.callback_open)
+                _this.Paras.callback_open();
+
+            // 自动关闭
+            if (_this.Paras.t === 0) {
+                _this.global = setTimeout(function() {
+                    _this.close.apply(_this, [_this.Paras.callback_close]);
+                }, _this.Paras.close_timer_ms);
+            }
+
+            // 监听点击关闭
+            _this.dom_show_Layer.unbind().on("touchstart mousedown", function(e) {
+                e.preventDefault();
+                _this.close.apply(_this, [_this.Paras.callback_close]);
+            });
         });
-        if (obj.t === 0) {
-            PromptLayer.global = setTimeout(function() {
-                PromptLayer.close(obj.callback_close);
-            }, PromptLayer.Timer);
-        }
 
     },
     //关闭弹框
     // callback_close：关闭后回调方法
     close: function(callback_close) {
-        clearTimeout(PromptLayer.global);
-        $(PromptLayer.LayerID + ",#PromptLayer_white").css("display", "none");
-        $(PromptLayer.LayerID).fadeOut(100, function() {
-            $(PromptLayer.LayerID + " .PlaceContent").html("");
-            if (callback_close !== undefined) {
+        var _this = this;
+
+        if (_this.global)
+            clearTimeout(_this.global);
+        _this.dom_bg_Layer.fadeTo(100, 0).css({
+            "width": 0,
+            "height": 0
+        });
+        _this.dom_show_Layer.fadeOut(100, function() {
+            _this.dom_td.text("");
+            if (callback_close) {
                 callback_close();
             }
         });
-    },
-
-    includeCSS: function(path) {
-        var a = document.createElement("link");
-        a.type = "text/css";
-        a.rel = "stylesheet";
-        a.href = path;
-        var head = document.getElementsByTagName("head")[0];
-        head.appendChild(a);
     }
 };
 
 if (typeof define === "function" && define.amd) {
-    define(function() {
+    define(["/inc/jquery.min.js"], function() {
+
+        PromptLayer.init();
         return PromptLayer;
     });
-}
-else
+} else
     PromptLayer.init();

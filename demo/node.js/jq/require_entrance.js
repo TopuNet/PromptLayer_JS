@@ -1,10 +1,8 @@
 require(["PromptLayer", "/inc/jquery.min.js"], function($PromptLayer) {
 
     $(function() {
-        PromptLayer.init();
-
         $("input[type=button]").click(function() {
-            var obj = {
+            var opt = {
                 str: "提交成功", //弹出层显示文字内容，支持HTML标签
                 t: 1, //0 - 2.5s后自动关闭（默认） 1 - 不自动关闭,
                 width: 300, //弹层宽度，默认300
@@ -19,7 +17,7 @@ require(["PromptLayer", "/inc/jquery.min.js"], function($PromptLayer) {
                     console.log("关闭后的回调方法");
                 }
             }
-            PromptLayer.show(obj);
+            $PromptLayer.show(opt);
         });
     });
 });

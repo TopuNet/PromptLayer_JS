@@ -1,64 +1,57 @@
-# PromptLayer JS插件 v1.2.6
+# PromptLayer JS插件 v2.0.1
 ###JS弹出消息层
 ###安装：npm install TopuNet-PromptLayer-JS
 
 文件结构：
 -------------
 1. PromptLayer.js 放入项目文件夹jq（原生规范）或widget/lib（AMD规范）中
-2. PromptLayer.css 放入项目文件夹css中
 
 页面引用：
 -------------
-1. 在页面中引用html代码块：
-
-		<div id="PromptLayer_white"></div>
-		<div id="PromptLayer">
-		    <table>
-		        <tr>
-		            <td class="PlaceContent"></td>
-		        </tr>
-		    </table>
-		</div>
-		根据项目语言，可将上述代码制作为引用页面复用（如ascx或html）
-2. 页面<head>中引用/css/PromptLayer.css
 
 原生引用：
 
-		3. 页面底端引用最新版 /inc/Jquery.min.js#1.x.x 或 zepto.min.js
-		4. Jquery后引用 /jq/PromptLayer.js
+		1. 页面底端引用最新版 /inc/Jquery.min.js#1.x.x 或 zepto.min.js
+		2. 后引用 /jq/PromptLayer.js
 
 requireJS引用：
 
-        3. 依赖PromptLayer.js和(jquery.min.js#1.x 或 zepto.js)，成功后返回对象PromptLayer
-        4. 执行PromptLayer.init();
+        1. 依赖PromptLayer.js和(jquery.min.js#1.x 或 zepto.min.js)，成功后返回对象PromptLayer
 
 功能配置及启用：
 --------------
 
 1. 调用方法：
 
-		var obj= {
-			str: "提交成功", //弹出层显示文字内容
-			t: 0, //0 - 2.5s后自动关闭（默认） 1 - 不自动关闭,
-			width: 300,  //弹层宽度，默认300
-			height: 100, //弹层高度，默认100
-			unit:"px", //宽高单位（px或vw），默认px，且IE6/7/8强制使用px。
-			fontSize:16, //字体大小，默认16。
-			fontUnit:"px", //字体单位（px或vw），默认px，且IE6/7/8强制使用px。
-			callback_open:function(){
-				console.log("弹出后的回调方法");
-			},
-			callback_close:function(){
-				console.log("关闭后的回调方法");
-			}
-		}
-		PromptLayer.show(obj);
+		var opt = {
+    		str: "提示内容",
+    		t: 0 - 自动关闭（默认） 1 - 不自动关闭,
+    		width: 宽度,  默认300
+    		height: 高度, 默认100
+    		unit:宽高单位 "px|vw", 默认px，且IE6/7/8强制使用px
+    		fontSize:"字体大小", 默认16。
+    		fontUnit:字体单位 "px|vw", 默认px，且IE6/7/8强制使用px。
+    		z_index: 弹层的z-index，内容盒为 z_index+1，默认400 
+    		close_timer_ms: 弹层自动关闭时间，单位毫秒。默认2500
+    		bg_Layer_color: 背景层颜色，默认#000
+    		bg_Layer_opacity: 背景层透明度，默认0.4
+    		callback_open:function(){弹出后的回调方法},
+    		callback_close:function(){关闭后的回调方法}
+    	}
+		PromptLayer.show(opt);
 
 2. 如想在一个项目中统一风格，可以直接修改PromptLayer.js源码中的默认参数或进行二次封装
 
 
 更新历史：
 --------------
+2.0.1
+
+		1. 重构。
+		2. 在页面中省去加html代码和css文件的引用
+		3. 增加参数：z_index、close_timer_ms、bg_Layer_color、bg_Layer_opacity，具体看调用方法的注释说明。
+		4. 修改了之前发现的一些bug
+
 1.2.6
 
 	    1. 通过jshint验证

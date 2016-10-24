@@ -110,7 +110,7 @@ app.locals.ImageDomain = config.ImageDomain;
 
 
 // uncomment after placing your favicon in /public
-//app.use(favicon(path.join(__dirname, 'public', 'favicon.ico')));
+// app.use(favicon(path.join(__dirname, 'public', 'favicon.ico')));
 app.use(logger('dev'));
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({
@@ -132,7 +132,7 @@ app.use(function(req, res, next) {
 // no stacktraces leaked to user
 app.use(function(err, req, res, next) {
     res.status(200);
-    res.render("demo.html")
+    res.render("demo_requirejs.html")
 });
 
 
