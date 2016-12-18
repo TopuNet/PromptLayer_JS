@@ -1,5 +1,5 @@
 /*
- * v2.0.1
+ * v2.0.2
  * 提示框弹层
  */
 
@@ -8,6 +8,10 @@ var PromptLayer = {
 
         // 初始化弹层
         this.Layer_init.apply(this);
+
+        // 监听窗口resize
+        this.resizeListening=false;
+        this.window_resize_listener.apply(this);
     },
     // 初始化弹层
     Layer_init: function() {
@@ -105,6 +109,9 @@ var PromptLayer = {
     show: function(opt) {
         var _this = this;
 
+        // 允许监听窗口resize
+        _this.resizeListening = true;
+
         // 让所有input和select和textarea失去焦点
         $("input,select,textarea").blur();
 
@@ -146,19 +153,6 @@ var PromptLayer = {
         // 设置文字内容
         _this.dom_td.text(_this.Paras.str);
 
-        // 监听窗口变化
-        var resize_n = 0;
-
-        $(window).resize(function() {
-
-            if ((++resize_n) % 2 === 0)
-                return;
-            setTimeout(function() {
-                _this.position_reinit.apply(_this);
-                resize_n = 0;
-            }, 0);
-        });
-
         //显示遮罩层
         _this.dom_bg_Layer.fadeTo(100, _this.Paras.bg_Layer_opacity);
         _this.dom_show_Layer.fadeIn(100, function() {
@@ -197,6 +191,24 @@ var PromptLayer = {
             _this.dom_td.text("");
             if (callback_close) {
                 callback_close();
+            }
+        });
+
+        // 停止监听窗口resize
+        _this.resizeListening = false;
+    },
+    // 监听窗口resize，改变背景盒宽高及弹层位置
+    window_resize_listener: function() {
+        var that = this;
+        var resize_n = 0;
+        $(window).resize(function() {
+            if (that.resizeListening) {
+                if ((++resize_n) % 2 === 0)
+                    return;
+                setTimeout(function() {
+                    that.position_reinit.apply(that);
+                    resize_n = 0;
+                }, 0);
             }
         });
     }

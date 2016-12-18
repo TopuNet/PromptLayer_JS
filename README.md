@@ -1,4 +1,4 @@
-# PromptLayer JS插件 v2.0.1
+# PromptLayer JS插件 v2.0.2
 ###JS弹出消息层
 ###安装：npm install TopuNet-PromptLayer-JS
 
@@ -45,6 +45,10 @@ requireJS引用：
 
 更新历史：
 --------------
+2.0.2
+
+		1. 修改 弹层->关层->重置窗口大小 后，背景层显示出来盖住窗口的bug
+
 2.0.1
 
 		1. 重构。
