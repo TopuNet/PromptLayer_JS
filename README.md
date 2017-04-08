@@ -1,6 +1,6 @@
 # PromptLayer JS插件 v2.0.2
-###JS弹出消息层
-###安装：npm install TopuNet-PromptLayer-JS
+### JS弹出消息层
+### 安装：npm install TopuNet-PromptLayer-JS
 
 文件结构：
 -------------
